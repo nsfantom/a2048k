@@ -88,7 +88,7 @@ class GameView : LinearLayout {
     }
 
     fun startGame() {
-
+        listener.getGameHolder().saveScoreStats()
         listener.getGameHolder().clearScore()
 
         for (y in 0 until Config.CELL_COUNT) {
@@ -303,7 +303,9 @@ class GameView : LinearLayout {
         }
 
         if (complete) {
-            AlertDialog.Builder(context).setTitle("Game informer").setMessage("GAME OVER").setPositiveButton("RESTART") { _, _ -> startGame() }.show()
+            listener.getGameHolder().saveScoreStats()
+            AlertDialog.Builder(context).setTitle("Game informer").setMessage("GAME OVER")
+                    .setPositiveButton("RESTART") { _, _ -> startGame() }.show()
         }
 
     }

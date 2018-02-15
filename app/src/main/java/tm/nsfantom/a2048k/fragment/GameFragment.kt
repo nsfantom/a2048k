@@ -10,12 +10,9 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_game.*
 import tm.nsfantom.a2048k.AppController
 import tm.nsfantom.a2048k.R
+import tm.nsfantom.a2048k.model.StatItem
 import tm.nsfantom.a2048k.ui.AnimLayer
 import tm.nsfantom.a2048k.ui.GameView
-
-/**
- * Created by user on 2/13/18.
- */
 
 class GameFragment : Fragment(), GameView.Listener {
     override fun getGameHolder(): GameFragment {
@@ -92,5 +89,16 @@ class GameFragment : Fragment(), GameView.Listener {
 
     fun getAnimLayer(): AnimLayer {
         return animLayer
+    }
+
+    fun saveScoreStats(){
+        if(!tvScore.text.toString().isEmpty()){
+            val result: Long = tvScore.text.toString().toLong()
+            if(result>0){
+                val currentMillis = System.currentTimeMillis()
+                val statItem = StatItem(result, currentMillis)
+                (activity.application as AppController).prefStorage.saveResults(statItem)
+            }
+        }
     }
 }

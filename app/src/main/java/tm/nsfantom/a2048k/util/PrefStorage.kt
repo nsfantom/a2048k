@@ -2,6 +2,10 @@ package tm.nsfantom.a2048k.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import tm.nsfantom.a2048k.model.StatItem
+
 
 /**
  * Created by nsfantom on 1/3/18.
@@ -10,6 +14,7 @@ import android.content.SharedPreferences
 class PrefStorage(private val context: Context) {
     private val KEY_BEST_SCORE = "bestScore"
     private val KEY_CELL_COUNT = "cellCount"
+    private val KEY_STATS = "statistics"
 
     private var sharedPreferences: SharedPreferences? = null
 
@@ -17,7 +22,7 @@ class PrefStorage(private val context: Context) {
         return prefs.getInt(KEY_BEST_SCORE, 0)
     }
 
-    fun getCellCount():Int {
+    fun getCellCount(): Int {
         return prefs.getInt(KEY_CELL_COUNT, 4)
     }
 
@@ -33,7 +38,22 @@ class PrefStorage(private val context: Context) {
         prefs.edit().putInt(KEY_BEST_SCORE, bestScore).apply()
     }
 
-    fun saveCellCount(count: Int){
-        prefs.edit().putInt(KEY_CELL_COUNT,count).apply()
+    fun saveCellCount(count: Int) {
+        prefs.edit().putInt(KEY_CELL_COUNT, count).apply()
+    }
+
+    fun saveResults(record: StatItem) {
+        val records = ArrayList<StatItem>()
+        records.addAll(getResults())
+        records.add(record)
+        val json = Gson().toJson(records)
+        prefs.edit().putString(KEY_STATS, json).apply()
+    }
+
+    fun getResults(): ArrayList<StatItem> {
+        val json = prefs.getString(KEY_STATS, "")
+        val founderListType = object : TypeToken<ArrayList<StatItem>>() {}.type
+        if (json.isEmpty()) return ArrayList()
+        return Gson().fromJson(json, founderListType)
     }
 }
