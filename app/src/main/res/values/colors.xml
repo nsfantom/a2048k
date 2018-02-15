@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="flat_button_text_color_material_light" >#fff</color>
+    <color name="flat_button_background_color_material_light" >#ff6f00</color>
+    <color name="colorHolder">#9b9b9b</color>
+
+    <color name="color_0">#cdc1b4</color>
+    <color name="color_2">#eee4da</color>
+    <color name="color_4">#ede0c8</color>
+    <color name="color_8">#f2b179</color>
+    <color name="color_16">#f59563</color>
+    <color name="color_32">#f67c5f</color>
+    <color name="color_64">#f65e3b</color>
+    <color name="color_128">#edcf72</color>
+    <color name="color_256">#edcc61</color>
+    <color name="color_512">#edc850</color>
+    <color name="color_1024">#edc53f</color>
+    <color name="color_2048">#edc22e</color>
+    <color name="color_00">#ff0000</color>
+    <color name="semiTransparent">#33ffffff</color>
+    <color name="defaultBackground">#fffaf8ef</color>
+    <color name="gameFrameBackground">#ffbbada0</color>
+</resources>
