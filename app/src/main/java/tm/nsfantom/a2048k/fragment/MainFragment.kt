@@ -9,10 +9,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_main.*
 import tm.nsfantom.a2048k.R
 
-/**
- * Created by user on 2/13/18.
- */
-
 class MainFragment : Fragment() {
     private lateinit var listener: Listener
 

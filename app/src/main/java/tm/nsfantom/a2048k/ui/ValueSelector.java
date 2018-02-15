@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import tm.nsfantom.a2048k.R;
 
-/**
- * Created by user on 2/14/18.
- */
-
 public class ValueSelector extends RelativeLayout {
 
     private boolean plusButtonIsPressed = false;
@@ -143,14 +139,14 @@ public class ValueSelector extends RelativeLayout {
 
     private void incrementValue() {
         int currentVal = Integer.valueOf(valueTextView.getText().toString());
-        if (currentVal < maxValue) {
+        if (currentVal  < maxValue) {
             valueTextView.setText(String.valueOf(currentVal + 1));
         }
     }
 
     private void decrementValue() {
         int currentVal = Integer.valueOf(valueTextView.getText().toString());
-        if (currentVal < maxValue) {
+        if (currentVal  > minValue) {
             valueTextView.setText(String.valueOf(currentVal - 1));
         }
     }

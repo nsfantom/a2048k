@@ -303,7 +303,7 @@ class GameView : LinearLayout {
         }
 
         if (complete) {
-            AlertDialog.Builder(context).setTitle("你好").setMessage("游戏结束").setPositiveButton("重新开始") { _, _ -> startGame() }.show()
+            AlertDialog.Builder(context).setTitle("Game informer").setMessage("GAME OVER").setPositiveButton("RESTART") { _, _ -> startGame() }.show()
         }
 
     }

@@ -15,7 +15,7 @@ import tm.nsfantom.a2048k.util.Config
  * Created by user on 2/13/18.
  */
 
-class GameSettingsFragment : Fragment() {
+class GameStatsFragment : Fragment() {
     private lateinit var listener: Listener
 
     interface Listener {
@@ -31,24 +31,17 @@ class GameSettingsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_gamesettings, container, false)
+        return inflater!!.inflate(R.layout.fragment_stats, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var savesSize = (activity.application as AppController).prefStorage.getCellCount()
-        sizeSelector.minValue=3
-        sizeSelector.maxValue=6
-        sizeSelector.value = savesSize
-        btnBack.setOnClickListener {
-            (activity.application as AppController).prefStorage.saveCellCount(sizeSelector.value)
-            Config.CELL_COUNT = sizeSelector.value
-            listener.onBackToMain() }
+        btnBack.setOnClickListener { listener.onBackToMain() }
     }
 
     companion object {
-        internal fun newInstance(): GameSettingsFragment {
-            return GameSettingsFragment()
+        internal fun newInstance(): GameStatsFragment {
+            return GameStatsFragment()
         }
     }
 }
