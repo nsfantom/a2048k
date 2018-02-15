@@ -5,8 +5,9 @@ import android.os.Bundle
 import tm.nsfantom.a2048k.fragment.MainFragment
 import tm.nsfantom.a2048k.R
 import tm.nsfantom.a2048k.fragment.GameFragment
+import tm.nsfantom.a2048k.fragment.GameSettingsFragment
 
-class MainActivity : AppCompatActivity(), MainFragment.Listener, GameFragment.Listener {
+class MainActivity : AppCompatActivity(), MainFragment.Listener, GameFragment.Listener, GameSettingsFragment.Listener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,12 @@ class MainActivity : AppCompatActivity(), MainFragment.Listener, GameFragment.Li
     }
 
     override fun onSettingsClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left,
+                        R.anim.slide_out_right)
+                .replace(android.R.id.content, GameSettingsFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
     }
 
     override fun onStatsClicked() {
@@ -36,6 +42,6 @@ class MainActivity : AppCompatActivity(), MainFragment.Listener, GameFragment.Li
     }
 
     override fun onBackToMain() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        onBackPressed()
     }
 }

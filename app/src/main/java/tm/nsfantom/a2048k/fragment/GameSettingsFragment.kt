@@ -6,9 +6,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_game2.*
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_gamesettings.*
+import tm.nsfantom.a2048k.AppController
 import tm.nsfantom.a2048k.R
+import tm.nsfantom.a2048k.util.Config
 
 /**
  * Created by user on 2/13/18.
@@ -30,12 +31,18 @@ class GameSettingsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_game2, container, false)
+        return inflater!!.inflate(R.layout.fragment_gamesettings, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-                //table.init(8,8)
+        sizeSelector.minValue=3
+        sizeSelector.maxValue=6
+        sizeSelector.value = (activity.application as AppController).prefStorage.getCellCount()
+        btnBack.setOnClickListener {
+            (activity.application as AppController).prefStorage.saveCellCount(sizeSelector.value)
+            Config.CELL_COUNT = sizeSelector.value
+            listener.onBackToMain() }
     }
 
     companion object {

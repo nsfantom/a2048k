@@ -4,83 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvLogo"
+    <tm.nsfantom.a2048k.ui.ValueSelector
+        android:id="@+id/sizeSelector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+
+    <Button
+        android:id="@+id/btnBack"
+        style="?attr/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_logo"
-        android:textColor="@color/flat_button_background_color_material_light"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/table"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
-
-    <tm.nsfantom.a2048k.ui.other.Linear2DLayout
-        android:id="@+id/table"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/navBottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLogo">
-        <tm.nsfantom.a2048k.ui.other.CellEntry
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            app:cellText="2400">
-
-        </tm.nsfantom.a2048k.ui.other.CellEntry>
-    </tm.nsfantom.a2048k.ui.other.Linear2DLayout>
-
-    <LinearLayout
-        android:id="@+id/navBottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:text="@string/btn_back"
+        android:theme="@style/FlatButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table">
-
-        <Button
-            android:id="@+id/btnLeft"
-            style="?attr/buttonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Left"
-            android:theme="@style/FlatButton" />
-
-        <Button
-            android:id="@+id/btnRight"
-            style="?attr/buttonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Right"
-            android:theme="@style/FlatButton" />
-
-        <Button
-            android:id="@+id/btnUp"
-            style="?attr/buttonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Up"
-            android:theme="@style/FlatButton" />
-
-        <Button
-            android:id="@+id/btnDown"
-            style="?attr/buttonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Down"
-            android:theme="@style/FlatButton" />
-    </LinearLayout>
-
-
+        android:layout_margin="8dp"/>
 </android.support.constraint.ConstraintLayout>

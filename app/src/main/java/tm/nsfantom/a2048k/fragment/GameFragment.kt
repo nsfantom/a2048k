@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_game.*
+import tm.nsfantom.a2048k.AppController
 import tm.nsfantom.a2048k.R
 import tm.nsfantom.a2048k.ui.AnimLayer
 import tm.nsfantom.a2048k.ui.GameView
-import tm.nsfantom.a2048k.util.Config
 
 /**
  * Created by user on 2/13/18.
@@ -74,21 +74,19 @@ class GameFragment : Fragment(), GameView.Listener {
     }
 
     fun saveBestScore(bestScore: Int) {
-        val e = activity.getPreferences(Context.MODE_PRIVATE).edit()
-        e.putInt(Config.KEY_BEST_SCORE, bestScore)
-        e.apply()
+        (activity.application as AppController).prefStorage.saveBestScore(bestScore)
         showBestScore(bestScore)
     }
 
-    fun getBestScore(): Int {
-        return activity.getPreferences(Context.MODE_PRIVATE).getInt(Config.KEY_BEST_SCORE, 0)
+    private fun getBestScore(): Int {
+        return (activity.application as AppController).prefStorage.getBestScore()
     }
 
     fun showBestScore() {
         tvBestScore.text = getBestScore().toString()
     }
 
-    fun showBestScore(score: Int) {
+    private fun showBestScore(score: Int) {
         tvBestScore.text = score.toString()
     }
 

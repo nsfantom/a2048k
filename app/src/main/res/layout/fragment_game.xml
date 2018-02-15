@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tvScore"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"/>
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <TextView
         android:id="@+id/tvScore"
@@ -49,9 +49,11 @@
 
     <Button
         android:id="@+id/btnNewGame"
+        style="?attr/buttonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/newgame"
+        android:text="@string/btn_newgame"
+        android:theme="@style/FlatButton"
         app:layout_constraintBottom_toTopOf="@+id/gameHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

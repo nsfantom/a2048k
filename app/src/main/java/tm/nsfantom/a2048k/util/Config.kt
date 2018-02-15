@@ -5,7 +5,6 @@ package tm.nsfantom.a2048k.util
  */
 
 object Config {
-    val KEY_BEST_SCORE = "bestScore"
     var CELL_COUNT = 4
     var CELL_SIZE = 0
 }

@@ -49,7 +49,7 @@ class Cell : FrameLayout {
 
         background = View(context)
         lp = FrameLayout.LayoutParams(-1, -1)
-        lp.setMargins(10, 10, 0, 0)
+        lp.setMargins(8, 8, 0, 0)
         background.setBackgroundResource(R.color.semiTransparent)
         addView(background, lp)
 
@@ -58,7 +58,7 @@ class Cell : FrameLayout {
         label.gravity = Gravity.CENTER
 
         lp = FrameLayout.LayoutParams(-1, -1)
-        lp.setMargins(10, 10, 0, 0)
+        lp.setMargins(8, 8, 0, 0)
         addView(label, lp)
 
     }

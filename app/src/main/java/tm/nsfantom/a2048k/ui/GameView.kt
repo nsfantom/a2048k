@@ -71,7 +71,7 @@ class GameView : LinearLayout {
     }
 
     fun startDraw(w :Int,h:Int){
-        Config.CELL_SIZE = (Math.min(w, h) - 10) / Config.CELL_COUNT
+        Config.CELL_SIZE = (Math.min(w, h) - 8) / Config.CELL_COUNT
         addCells(Config.CELL_SIZE, Config.CELL_SIZE)
         startGame()
     }

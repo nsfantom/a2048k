@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">A2048K</string>
+    <string name="txt_logo">2048</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_settings">Settings</string>
+    <string name="btn_statistics">Statistics</string>
+
+    <string name="valueSelector_label">VALUE</string>
+    <string name="valueBarLabel">CURRENT VALUE</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="score">Score：</string>
+    <string name="bestscore">Best score：</string>
+    <string name="btn_newgame">NEW</string>
+    <string name="appinfo">2048，footer info</string>
+    <string name="btn_back">Back</string>
+
+</resources>
