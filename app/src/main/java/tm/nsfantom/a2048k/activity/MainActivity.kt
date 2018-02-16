@@ -10,7 +10,6 @@ import tm.nsfantom.a2048k.fragment.GameStatsFragment
 
 class MainActivity : AppCompatActivity(), MainFragment.Listener, GameFragment.Listener, GameSettingsFragment.Listener, GameStatsFragment.Listener {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {

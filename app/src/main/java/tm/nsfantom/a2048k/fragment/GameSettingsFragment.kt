@@ -11,9 +11,6 @@ import tm.nsfantom.a2048k.AppController
 import tm.nsfantom.a2048k.R
 import tm.nsfantom.a2048k.util.Config
 
-/**
- * Created by user on 2/13/18.
- */
 
 class GameSettingsFragment : Fragment() {
     private lateinit var listener: Listener
@@ -36,7 +33,7 @@ class GameSettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var savesSize = (activity.application as AppController).prefStorage.getCellCount()
+        val savesSize = (activity.application as AppController).prefStorage.getCellCount()
         sizeSelector.setLabelText(getString(R.string.settings_dimension_label))
         sizeSelector.minValue=3
         sizeSelector.maxValue=6
@@ -44,7 +41,8 @@ class GameSettingsFragment : Fragment() {
         btnBack.setOnClickListener {
             (activity.application as AppController).prefStorage.saveCellCount(sizeSelector.value)
             Config.CELL_COUNT = sizeSelector.value
-            listener.onBackToMain() }
+            listener.onBackToMain()
+        }
     }
 
     companion object {
