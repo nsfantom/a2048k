@@ -2,15 +2,15 @@ package tm.nsfantom.a2048k.ui;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import tm.nsfantom.a2048k.R;
 
-public class ValueSelector extends RelativeLayout {
+public class ValueSelector extends ConstraintLayout {
 
     private boolean plusButtonIsPressed = false;
     private boolean minusButtonIsPressed = false;

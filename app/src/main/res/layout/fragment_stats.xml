@@ -12,7 +12,7 @@
         android:layout_margin="8dp"
         android:gravity="center"
         android:text="Statistics"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnResult"
