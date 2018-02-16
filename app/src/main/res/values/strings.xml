@@ -17,4 +17,9 @@
     <string name="score_label">Score: %d</string>
     <string name="settings_dimension_label">dimension</string>
 
+    <!-- Alert Dialog-->
+    <string name="game_over_message"> GAME OVER \nYour score: %d!</string>
+    <string name="btn_restart">RESTART</string>
+    <string name="game_over_title">Game informer</string>
+
 </resources>

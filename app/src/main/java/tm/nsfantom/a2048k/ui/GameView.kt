@@ -1,6 +1,5 @@
 package tm.nsfantom.a2048k.ui
 
-import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Point
 import android.util.AttributeSet
@@ -8,14 +7,21 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import tm.nsfantom.a2048k.R
-import tm.nsfantom.a2048k.fragment.GameFragment
 import tm.nsfantom.a2048k.util.Config
 
 class GameView : LinearLayout {
     private inline fun <reified T> matrix2d(height: Int, width: Int, init: (Int, Int) -> Array<T>) = Array(height, { row -> init(row, width) })
     private lateinit var cellsMap: Array<Array<Cell>>
     private val emptyPoints = ArrayList<Point>()
-    lateinit var listener: Listener
+    lateinit var gameHolder: Listener
+
+    interface Listener {
+        fun animScaleUp(cell: Cell)
+        fun animMove(from: Cell, to: Cell, fromX: Int, toX: Int, fromY: Int, toY: Int)
+        fun gameSaveScoreStats()
+        fun gameAddScore(s: Int)
+        fun gameShowGameOver()
+    }
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -66,11 +72,7 @@ class GameView : LinearLayout {
         })
     }
 
-    interface Listener {
-        fun getGameHolder(): GameFragment
-    }
-
-    fun startDraw(w :Int,h:Int){
+    fun startDraw(w: Int, h: Int) {
         Config.CELL_SIZE = (Math.min(w, h) - 8) / Config.CELL_COUNT
         addCells(Config.CELL_SIZE, Config.CELL_SIZE)
         startGame()
@@ -88,8 +90,7 @@ class GameView : LinearLayout {
     }
 
     fun startGame() {
-        listener.getGameHolder().saveScoreStats()
-        listener.getGameHolder().clearScore()
+        gameHolder.gameSaveScoreStats()
 
         for (y in 0 until Config.CELL_COUNT) {
             for (x in 0 until Config.CELL_COUNT) {
@@ -116,8 +117,7 @@ class GameView : LinearLayout {
         if (emptyPoints.size > 0) {
             val p = emptyPoints.removeAt((Math.random() * emptyPoints.size).toInt())
             cellsMap[p.x][p.y].num = if (Math.random() > 0.1) 2 else 4
-
-            listener.getGameHolder().getAnimLayer().scaleUp(cellsMap[p.x][p.y])
+            gameHolder.animScaleUp(cellsMap[p.x][p.y])
         }
     }
 
@@ -134,8 +134,7 @@ class GameView : LinearLayout {
                     if (cellsMap[x1][y].num > 0) {
 
                         if (cellsMap[x][y].num <= 0) {
-
-                            listener.getGameHolder().getAnimLayer().animateMove(cellsMap[x1][y], cellsMap[x][y], x1, x, y, y)
+                            gameHolder.animMove(cellsMap[x1][y], cellsMap[x][y], x1, x, y, y)
 
                             cellsMap[x][y].num = cellsMap[x1][y].num
                             cellsMap[x1][y].num = 0
@@ -144,11 +143,12 @@ class GameView : LinearLayout {
                             merge = true
 
                         } else if (cellsMap[x][y].equals(cellsMap[x1][y])) {
-                            listener.getGameHolder().getAnimLayer().animateMove(cellsMap[x1][y], cellsMap[x][y], x1, x, y, y)
+                            gameHolder.animMove(cellsMap[x1][y], cellsMap[x][y], x1, x, y, y)
+
                             cellsMap[x][y].num = cellsMap[x][y].num * 2
                             cellsMap[x1][y].num = 0
 
-                            listener.getGameHolder().addScore(cellsMap[x][y].num)
+                            gameHolder.gameAddScore(cellsMap[x][y].num)
                             merge = true
                         }
 
@@ -177,17 +177,17 @@ class GameView : LinearLayout {
                     if (cellsMap[x1][y].num > 0) {
 
                         if (cellsMap[x][y].num <= 0) {
-                            listener.getGameHolder().getAnimLayer().animateMove(cellsMap[x1][y], cellsMap[x][y], x1, x, y, y)
+                            gameHolder.animMove(cellsMap[x1][y], cellsMap[x][y], x1, x, y, y)
                             cellsMap[x][y].num = cellsMap[x1][y].num
                             cellsMap[x1][y].num = 0
 
                             x++
                             merge = true
                         } else if (cellsMap[x][y].equals(cellsMap[x1][y])) {
-                            listener.getGameHolder().getAnimLayer().animateMove(cellsMap[x1][y], cellsMap[x][y], x1, x, y, y)
+                            gameHolder.animMove(cellsMap[x1][y], cellsMap[x][y], x1, x, y, y)
                             cellsMap[x][y].num = cellsMap[x][y].num * 2
                             cellsMap[x1][y].num = 0
-                            listener.getGameHolder().addScore(cellsMap[x][y].num)
+                            gameHolder.gameAddScore(cellsMap[x][y].num)
                             merge = true
                         }
 
@@ -216,7 +216,7 @@ class GameView : LinearLayout {
                     if (cellsMap[x][y1].num > 0) {
 
                         if (cellsMap[x][y].num <= 0) {
-                            listener.getGameHolder().getAnimLayer().animateMove(cellsMap[x][y1], cellsMap[x][y], x, x, y1, y)
+                            gameHolder.animMove(cellsMap[x][y1], cellsMap[x][y], x, x, y1, y)
                             cellsMap[x][y].num = cellsMap[x][y1].num
                             cellsMap[x][y1].num = 0
 
@@ -224,10 +224,10 @@ class GameView : LinearLayout {
 
                             merge = true
                         } else if (cellsMap[x][y].equals(cellsMap[x][y1])) {
-                            listener.getGameHolder().getAnimLayer().animateMove(cellsMap[x][y1], cellsMap[x][y], x, x, y1, y)
+                            gameHolder.animMove(cellsMap[x][y1], cellsMap[x][y], x, x, y1, y)
                             cellsMap[x][y].num = cellsMap[x][y].num * 2
                             cellsMap[x][y1].num = 0
-                            listener.getGameHolder().addScore(cellsMap[x][y].num)
+                            gameHolder.gameAddScore(cellsMap[x][y].num)
                             merge = true
                         }
 
@@ -257,17 +257,17 @@ class GameView : LinearLayout {
                     if (cellsMap[x][y1].num > 0) {
 
                         if (cellsMap[x][y].num <= 0) {
-                            listener.getGameHolder().getAnimLayer().animateMove(cellsMap[x][y1], cellsMap[x][y], x, x, y1, y)
+                            gameHolder.animMove(cellsMap[x][y1], cellsMap[x][y], x, x, y1, y)
                             cellsMap[x][y].num = cellsMap[x][y1].num
                             cellsMap[x][y1].num = 0
 
                             y++
                             merge = true
                         } else if (cellsMap[x][y].equals(cellsMap[x][y1])) {
-                            listener.getGameHolder().getAnimLayer().animateMove(cellsMap[x][y1], cellsMap[x][y], x, x, y1, y)
+                            gameHolder.animMove(cellsMap[x][y1], cellsMap[x][y], x, x, y1, y)
                             cellsMap[x][y].num = cellsMap[x][y].num * 2
                             cellsMap[x][y1].num = 0
-                            listener.getGameHolder().addScore(cellsMap[x][y].num)
+                            gameHolder.gameAddScore(cellsMap[x][y].num)
                             merge = true
                         }
 
@@ -303,10 +303,7 @@ class GameView : LinearLayout {
         }
 
         if (complete) {
-            listener.getGameHolder().saveScoreStats()
-            AlertDialog.Builder(context).setTitle("Game informer").setMessage("GAME OVER")
-                    .setPositiveButton("RESTART") { _, _ -> startGame() }.show()
+            gameHolder.gameShowGameOver()
         }
-
     }
 }
