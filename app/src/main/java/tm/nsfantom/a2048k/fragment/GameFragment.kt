@@ -67,6 +67,12 @@ class GameFragment : Fragment(), GameView.Listener {
         return (activity.application as AppController).prefStorage.getBestScore()
     }
 
+    private fun clearScore() {
+        score = 0
+        showScore()
+        tvBestScore.text = getBestScore().toString()
+    }
+
     override fun animScaleUp(cell: Cell) {
         animLayer.scaleUp(cell)
     }
@@ -84,13 +90,7 @@ class GameFragment : Fragment(), GameView.Listener {
                 (activity.application as AppController).prefStorage.saveResults(statItem)
             }
         }
-        gameClearScore()
-    }
-
-    private fun gameClearScore() {
-        score = 0
-        showScore()
-        tvBestScore.text = getBestScore().toString()
+        clearScore()
     }
 
     override fun gameAddScore(s: Int) {
