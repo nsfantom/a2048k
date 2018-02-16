@@ -9,3 +9,6 @@ class StatItem(@field:SerializedName("result")
                var result: Long,
                @field:SerializedName("date")
                @field:Expose var date: Long)
+{
+    var rank: Int = -1
+}

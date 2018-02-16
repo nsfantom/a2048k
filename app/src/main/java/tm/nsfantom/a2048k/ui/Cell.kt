@@ -73,4 +73,3 @@ class Cell : FrameLayout {
         return c
     }
 }
-

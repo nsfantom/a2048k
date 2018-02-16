@@ -37,6 +37,7 @@ class GameSettingsFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var savesSize = (activity.application as AppController).prefStorage.getCellCount()
+        sizeSelector.setLabelText(getString(R.string.settings_dimension_label))
         sizeSelector.minValue=3
         sizeSelector.maxValue=6
         sizeSelector.value = savesSize

@@ -16,10 +16,8 @@ public class ValueSelector extends RelativeLayout {
     private boolean minusButtonIsPressed = false;
     private final long REPEAT_INTERVAL_MS = 100l;
 
-    View rootView;
-    TextView valueTextView;
-    View minusButton;
-    View plusButton;
+    private TextView valueTextView;
+    private TextView tvValueLabel;
 
     Handler handler = new Handler();
 
@@ -39,11 +37,12 @@ public class ValueSelector extends RelativeLayout {
     }
 
     private void init(Context context) {
-        rootView = inflate(context, R.layout.value_selector, this);
+        View rootView = inflate(context, R.layout.value_selector, this);
         valueTextView = (TextView) rootView.findViewById(R.id.etValue);
+        tvValueLabel = (TextView) rootView.findViewById(R.id.tvValueLabel);
 
-        minusButton = rootView.findViewById(R.id.btnMinus);
-        plusButton = rootView.findViewById(R.id.btnPlus);
+        View minusButton = rootView.findViewById(R.id.btnMinus);
+        View plusButton = rootView.findViewById(R.id.btnPlus);
 
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,5 +167,9 @@ public class ValueSelector extends RelativeLayout {
                 handler.postDelayed(new AutoDecrementer(), REPEAT_INTERVAL_MS);
             }
         }
+    }
+
+    public void setLabelText(String text) {
+        tvValueLabel.setText(text);
     }
 }

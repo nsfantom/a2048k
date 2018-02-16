@@ -7,10 +7,6 @@ import com.google.gson.reflect.TypeToken
 import tm.nsfantom.a2048k.model.StatItem
 
 
-/**
- * Created by nsfantom on 1/3/18.
- */
-
 class PrefStorage(private val context: Context) {
     private val KEY_BEST_SCORE = "bestScore"
     private val KEY_CELL_COUNT = "cellCount"
@@ -46,7 +42,9 @@ class PrefStorage(private val context: Context) {
         val records = ArrayList<StatItem>()
         records.addAll(getResults())
         records.add(record)
-        val json = Gson().toJson(records)
+        records.sortBy { e -> e.date }
+        records.sortByDescending { e -> e.result }
+        val json = Gson().toJson(records.take(10))
         prefs.edit().putString(KEY_STATS, json).apply()
     }
 

@@ -98,6 +98,7 @@ class GameFragment : Fragment(), GameView.Listener {
                 val currentMillis = System.currentTimeMillis()
                 val statItem = StatItem(result, currentMillis)
                 (activity.application as AppController).prefStorage.saveResults(statItem)
+                tvScore.text = "0"
             }
         }
     }
