@@ -4,6 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/button_plus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/sizeSelector"/>
+
     <tm.nsfantom.a2048k.ui.ValueSelector
         android:id="@+id/sizeSelector"
         android:layout_width="wrap_content"
@@ -11,8 +22,8 @@
         app:layout_constraintBottom_toTopOf="@+id/colorSelector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnTest"
+        />
 
     <tm.nsfantom.a2048k.ui.ColorSelector
         android:id="@+id/colorSelector"

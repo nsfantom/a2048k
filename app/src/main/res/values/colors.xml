@@ -5,12 +5,14 @@
     <color name="colorAccent">#004bac</color>
 
     <color name="primaryColor">#ffab40</color>
+    <color name="colorButton">#ff6f00</color>
+    <color name="colorButtonPressed">#de6000</color>
     <color name="primaryLightColor">#ffdd71</color>
     <color name="primaryDarkColor">#c77c02</color>
     <color name="primaryTextColor">#000000</color>
 
     <color name="flat_button_text_color_material_light" >@color/colorPrimary</color>
-    <color name="flat_button_background_color_material_light" >#ff6f00</color>
+    <color name="flat_button_background_color_material_light" >@color/colorButton</color>
     <color name="colorHolder">#9b9b9b</color>
 
     <color name="color_0">#cdc1b4</color>
