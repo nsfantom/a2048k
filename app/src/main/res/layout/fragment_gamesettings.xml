@@ -16,12 +16,38 @@
 
     <tm.nsfantom.a2048k.ui.ColorSelector
         android:id="@+id/colorSelector"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btnBack"
+        app:layout_constraintBottom_toTopOf="@+id/btnUseDefaultColors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sizeSelector" />
+        app:layout_constraintTop_toBottomOf="@+id/sizeSelector"
+        android:layout_margin="8dp"/>
+    <Button
+        android:id="@+id/btnSaveColors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnUseDefaultColors"
+        app:layout_constraintTop_toBottomOf="@+id/colorSelector"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
+        android:text="save colors"
+        style="?attr/buttonStyle"
+        android:theme="@style/FlatButton"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:layout_margin="8dp"/>
+    <Button
+        android:id="@+id/btnUseDefaultColors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/colorSelector"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
+        app:layout_constraintStart_toEndOf="@+id/btnSaveColors"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        android:text="use default colors"
+        style="?attr/buttonStyle"
+        android:theme="@style/FlatButton"/>
 
     <Button
         android:id="@+id/btnBack"
@@ -34,5 +60,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorSelector" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUseDefaultColors" />
 </android.support.constraint.ConstraintLayout>

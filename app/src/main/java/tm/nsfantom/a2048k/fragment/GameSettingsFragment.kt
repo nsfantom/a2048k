@@ -35,14 +35,24 @@ class GameSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val savesSize = (activity.application as AppController).prefStorage.getCellCount()
         sizeSelector.setLabelText(getString(R.string.settings_dimension_label))
-        sizeSelector.minValue=3
-        sizeSelector.maxValue=6
+        sizeSelector.minValue = 3
+        sizeSelector.maxValue = 6
         sizeSelector.value = savesSize
         btnBack.setOnClickListener {
             (activity.application as AppController).prefStorage.saveCellCount(sizeSelector.value)
             Config.CELL_COUNT = sizeSelector.value
             listener.onBackToMain()
         }
+
+        btnUseDefaultColors.setOnClickListener({
+            colorSelector.setDefaultPixel(0)
+            (activity.application as AppController).prefStorage.saveColorFilter(0)
+        })
+
+        btnSaveColors.setOnClickListener({
+            (activity.application as AppController).prefStorage.saveColorFilter(colorSelector.pixel)
+        })
+
     }
 
     companion object {

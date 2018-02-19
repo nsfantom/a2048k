@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
+import tm.nsfantom.a2048k.AppController
 import tm.nsfantom.a2048k.R
 import tm.nsfantom.a2048k.util.Config
 
@@ -30,6 +31,7 @@ class GameView : LinearLayout {
     }
 
     private fun initGameView() {
+        Config.CELL_COUNT = (context.applicationContext as AppController).prefStorage.getCellCount()
         cellsMap = matrix2d(Config.CELL_COUNT, Config.CELL_COUNT, { _: Int, width: Int -> Array(width) { _ -> Cell(context) } })
         orientation = LinearLayout.VERTICAL
         setBackgroundResource(R.color.gameFrameBackground)

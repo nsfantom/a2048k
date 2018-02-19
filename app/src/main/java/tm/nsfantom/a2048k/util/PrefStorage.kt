@@ -12,6 +12,7 @@ class PrefStorage(private val context: Context) {
     private val KEY_BEST_SCORE = "bestScore"
     private val KEY_CELL_COUNT = "cellCount"
     private val KEY_STATS = "statistics"
+    private val KEY_PIXEL = "pixel"
 
     private var sharedPreferences: SharedPreferences? = null
 
@@ -56,25 +57,30 @@ class PrefStorage(private val context: Context) {
         return Gson().fromJson(json, founderListType)
     }
 
-    fun getDefaultColors():IntArray{
-        return IntArray(13, init = {
-            when (it) {
-                0 -> (R.color.color_0)
-                1 -> (R.color.color_2)
-                2 -> (R.color.color_4)
-                3 -> (R.color.color_8)
-                4 -> (R.color.color_16)
-                5 -> (R.color.color_32)
-                6 -> (R.color.color_64)
-                7 -> (R.color.color_128)
-                8 -> (R.color.color_256)
-                9 -> (R.color.color_512)
-                10 -> (R.color.color_1024)
-                11 -> (R.color.color_2048)
-                12 -> (R.color.color_00)
-                else -> {0
-                }
-            }
-        })
+    fun saveColorFilter(pixel: Int){
+        prefs.edit().putInt(KEY_PIXEL,pixel).apply()
+    }
+
+    fun restoreColorFilter(): Int{
+        return prefs.getInt(KEY_PIXEL,0)
+    }
+
+    companion object Defaults {
+        fun getDefaultColors(): IntArray {
+            return intArrayOf(
+                    R.color.color_0,
+                    R.color.color_2,
+                    R.color.color_4,
+                    R.color.color_8,
+                    R.color.color_16,
+                    R.color.color_32,
+                    R.color.color_64,
+                    R.color.color_128,
+                    R.color.color_256,
+                    R.color.color_512,
+                    R.color.color_1024,
+                    R.color.color_2048,
+                    R.color.color_00)
+        }
     }
 }
