@@ -23,9 +23,10 @@ import tm.nsfantom.a2048k.util.DisplayUtil;
  * Created by user on 2/16/18.
  */
 
-public class ColorSelector extends LinearLayout {
+public class ColorSelector extends LinearLayout{
     View layout;
-    int[] colors = new int[13];
+    int[] colorArray;
+    int[] selectedArray;
 
     public ColorSelector(Context context) {
         super(context);
@@ -33,49 +34,45 @@ public class ColorSelector extends LinearLayout {
 
     public ColorSelector(Context context, AttributeSet attrs) {
         super(context, attrs);
-//        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ForList, 0, 0);
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         setOrientation(VERTICAL);
         layout = layoutInflater.inflate(R.layout.color_selector, this, true);
-//        try {
-//            headerText = a.getString(R.styleable.ForList_headerText);
-//            mainColor = a.getColor(R.styleable.ForList_mainColor, Color.DKGRAY);
-//            footerText = a.getString(R.styleable.ForList_footerText);
-//            secondColor =a.getColor(R.styleable.ForList_secondColor, Color.GRAY);
-//            textColor = a.getColor(R.styleable.ForList_textColor, Color.WHITE);
-//            holderColor = a.getColor(R.styleable.ForList_holderColor, Color.GRAY);
-//        } finally {
-//            a.recycle();
-//        }
         final SampleView sampleView = new SampleView(context);
         addView(sampleView, LayoutParams.MATCH_PARENT, DisplayUtil.dpToPx(getResources(), 16));
         final LinearLayout colorHolder = layout.findViewById(R.id.colorHolder);
         colorHolder.post(() -> {
             int num = 13;
+            colorArray = new int[13];
             for (int i = 0; i < num; i++) {
                 int width = colorHolder.getWidth() / num;
                 View v = new View(context);
-                v.setBackgroundColor(colors[i]);
+                int color = 240 - (int)((222f/num)*i);
+                colorArray[i] = DisplayUtil.getIntFromColor(color,color,color);
+                v.setBackgroundColor(colorArray[i]);
                 colorHolder.addView(v, width, colorHolder.getHeight());
+
             }
         });
 
         sampleView.setOnTouchListener((v, event) -> {
             int pixel = ((SampleView) v).drawTarget((int) event.getX(), (int) event.getY());
-            colorHolder.setBackgroundColor(pixel);
 //            int r = pixel >> 16 & 0xff, g = pixel >> 8 & 0xff, b = pixel >> 0 & 0xff;
-            ColorDrawable c = new ColorDrawable(pixel);
+            ColorDrawable c;
+            selectedArray = colorArray;
             for (int i = 0; i < colorHolder.getChildCount(); i++) {
-//                int color = (DisplayUtil.getIntFromColor(r,g,b));
-                c.setColorFilter(Color.RED, PorterDuff.Mode.XOR);
-                c = new ColorDrawable(c.getColor());
+                c = new ColorDrawable(colorArray[i]);
+                c.setColorFilter(pixel, PorterDuff.Mode.OVERLAY);
+                c.mutate();
+                selectedArray[i] = c.getColor();
                 Timber.e("color: %s",c.getColor());
-                colorHolder.getChildAt(i).setBackgroundColor(c.getColor());
+                colorHolder.getChildAt(i).setBackground(c.getCurrent());
             }
             return true;
         });
 
     }
+
+
 
     public ColorSelector(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -118,7 +115,6 @@ public class ColorSelector extends LinearLayout {
             rectGrad = new Rect();
             paintPicker = new Paint();
         }
-
 
         @Override
         protected void onDraw(Canvas canvas) {

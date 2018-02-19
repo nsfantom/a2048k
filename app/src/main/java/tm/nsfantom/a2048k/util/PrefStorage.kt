@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import tm.nsfantom.a2048k.R
 import tm.nsfantom.a2048k.model.StatItem
 
 
@@ -53,5 +54,27 @@ class PrefStorage(private val context: Context) {
         val founderListType = object : TypeToken<ArrayList<StatItem>>() {}.type
         if (json.isEmpty()) return ArrayList()
         return Gson().fromJson(json, founderListType)
+    }
+
+    fun getDefaultColors():IntArray{
+        return IntArray(13, init = {
+            when (it) {
+                0 -> (R.color.color_0)
+                1 -> (R.color.color_2)
+                2 -> (R.color.color_4)
+                3 -> (R.color.color_8)
+                4 -> (R.color.color_16)
+                5 -> (R.color.color_32)
+                6 -> (R.color.color_64)
+                7 -> (R.color.color_128)
+                8 -> (R.color.color_256)
+                9 -> (R.color.color_512)
+                10 -> (R.color.color_1024)
+                11 -> (R.color.color_2048)
+                12 -> (R.color.color_00)
+                else -> {0
+                }
+            }
+        })
     }
 }
