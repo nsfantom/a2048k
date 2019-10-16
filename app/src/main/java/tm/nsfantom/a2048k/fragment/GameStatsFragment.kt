@@ -29,18 +29,18 @@ class GameStatsFragment : Fragment() {
         listener = activity as Listener
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_stats, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnBack.setOnClickListener { listener.onBackToMain() }
-        val values: ArrayList<StatItem> = (activity.application as AppController).prefStorage.getResults()
+        val values: ArrayList<StatItem> = (activity?.application as AppController).prefStorage.getResults()
         values.sortByDescending { e -> e.result }
         for (i in 0 until values.size)
             values[i].rank = i + 1
-        val adapter = SimpleArrayAdapter(context, values)
+        val adapter = SimpleArrayAdapter(context!!, values)
         (lvResults as ListView).adapter = adapter
         btnResult.setOnClickListener({
             if (direction == Direction.SCORE_UP)

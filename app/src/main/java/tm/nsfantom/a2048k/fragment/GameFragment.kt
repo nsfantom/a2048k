@@ -38,11 +38,11 @@ class GameFragment : Fragment(), GameView.Listener {
         listener = activity as Listener
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_game, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         container.setBackgroundResource(R.color.defaultBackground)
         btnNewGame.setOnClickListener({ gameView.startGame() })
@@ -55,7 +55,7 @@ class GameFragment : Fragment(), GameView.Listener {
     }
 
     private fun saveBestScore(bestScore: Int) {
-        (activity.application as AppController).prefStorage.saveBestScore(bestScore)
+        (activity?.application as AppController).prefStorage.saveBestScore(bestScore)
         tvBestScore.text = bestScore.toString()
     }
 
@@ -64,7 +64,7 @@ class GameFragment : Fragment(), GameView.Listener {
     }
 
     private fun getBestScore(): Int {
-        return (activity.application as AppController).prefStorage.getBestScore()
+        return (activity?.application as AppController).prefStorage.getBestScore()
     }
 
     private fun clearScore() {
@@ -87,7 +87,7 @@ class GameFragment : Fragment(), GameView.Listener {
             if (result > 0) {
                 val currentMillis = System.currentTimeMillis()
                 val statItem = StatItem(result, currentMillis)
-                (activity.application as AppController).prefStorage.saveResults(statItem)
+                (activity?.application as AppController).prefStorage.saveResults(statItem)
             }
         }
         clearScore()

@@ -27,19 +27,19 @@ class GameSettingsFragment : Fragment() {
         listener = activity as Listener
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_gamesettings, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val savesSize = (activity.application as AppController).prefStorage.getCellCount()
+        val savesSize = (activity?.application as AppController).prefStorage.getCellCount()
         sizeSelector.setLabelText(getString(R.string.settings_dimension_label))
         sizeSelector.minValue=3
         sizeSelector.maxValue=6
         sizeSelector.value = savesSize
         btnBack.setOnClickListener {
-            (activity.application as AppController).prefStorage.saveCellCount(sizeSelector.value)
+            (activity?.application as AppController).prefStorage.saveCellCount(sizeSelector.value)
             Config.CELL_COUNT = sizeSelector.value
             listener.onBackToMain()
         }
